@@ -17,11 +17,26 @@ from scipy.stats.distributions import randint, uniform
 dists: Dict[str, Any] = {
     "climate": {
         "uq": {
-            "b_low": uniform(loc=-5, scale=4),
+            "b_low": uniform(loc=-6, scale=4),
             "b_high": uniform(loc=1, scale=4),
-            "ela": uniform(loc=500, scale=1000),
+            "ela": uniform(loc=600, scale=1000),
             "temp_ela": uniform(loc=-20, scale=16),
             "lapse_rate": uniform(loc=-7, scale=2),
+        },
+        "default_values": {
+            "phi": 35.0,
+            "pseudo_plastic_q": 0.5,
+        },
+    },
+    "climate-flow": {
+        "uq": {
+            "b_low": uniform(loc=-6, scale=4),
+            "b_high": uniform(loc=1, scale=4),
+            "ela": uniform(loc=600, scale=1000),
+            "temp_ela": uniform(loc=-20, scale=16),
+            "lapse_rate": uniform(loc=-7, scale=2),
+            "phi": uniform(loc=10, scale=50),
+            "pseudo_plastic_q": uniform(loc=0.25, scale=0.75),
         },
         "default_values": {
         },
@@ -35,8 +50,8 @@ parser.add_argument(
     "--n_samples",
     dest="n_samples",
     type=int,
-    help="""number of samples to draw. default=10.""",
-    default=10,
+    help="""number of samples to draw. default=1000.""",
+    default=1000,
 )
 parser.add_argument(
     "-d",
