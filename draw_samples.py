@@ -26,6 +26,7 @@ dists: Dict[str, Any] = {
         "default_values": {
             "phi": 35.0,
             "pseudo_plastic_q": 0.5,
+            "sia_e": 1.0,
         },
     },
     "climate-flow": {
@@ -35,6 +36,7 @@ dists: Dict[str, Any] = {
             "ela": uniform(loc=600, scale=1000),
             "temp_ela": uniform(loc=-20, scale=16),
             "lapse_rate": uniform(loc=-7, scale=2),
+            "sia_e": uniform(loc=1, scale=3),
             "phi": uniform(loc=10, scale=50),
             "pseudo_plastic_q": uniform(loc=0.25, scale=0.75),
         },
