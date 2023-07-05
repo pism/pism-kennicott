@@ -44,7 +44,7 @@ uq_df.fillna(False, inplace=True)
 
 scripts = []
 runlength = 5000
-odir = "2023_06_23_uq_climate_flow"
+odir = "2023_06_30_uq_climate_flow_calving"
 
 for d in [odir, f"{odir}/state",f"{odir}/spatial",f"{odir}/scalar", f"{odir}/run_scripts"]:
     if os.path.isdir(d) == False:
@@ -73,7 +73,7 @@ for n, row in enumerate(uq_df.iterrows()):
     
     outfile = f"kennicott_id_{m_id}_0_{runlength}.nc"
     script = f"{odir}/run_scripts/kennicott_id_{m_id}_0_{runlength}.sh"
-    cmd = f"pismr -bootstrap -config_override psg_config.nc -cfbc -sia_e {sia_e} -skip -skip_max 5000 -i 2023_06_20_init/state/sia_2000a.nc -surface elevation -ice_surface_temp {temp_min},{temp_max},{z_min},{z_max} -climatic_mass_balance {b_low},{b_high},250,{ela},3250 -climatic_mass_balance_limits -10,0 -stress_balance ssa+sia -pseudo_plastic -pseudo_plastic_q {q} -pseudo_plastic_uthreshold 100.0 -yield_stress mohr_coulomb -plastic_phi {phi} -ssafd_ksp_type gmres -ssafd_ksp_norm_type unpreconditioned -ssafd_ksp_pc_side right -ssafd_pc_type asm -ssafd_sub_pc_type lu -periodicity y   -stress_balance.sia.bed_smoother.range 100 -grid.registration corner  -extra_times 100 -extra_file {odir}/spatial/spatial_{outfile} -extra_vars thk,topg,usurf,velbase_mag,velsurf_mag -ts_times yearly -ts_file {odir}/scalar/ts_{outfile} -y {runlength} -o {odir}/state/{outfile}"
+    cmd = f"pismr -bootstrap -config_override psg_config.nc -cfbc -sia_e {sia_e} -skip -skip_max 5000 -i 2023_06_20_init/state/sia_2000a.nc -surface elevation -ice_surface_temp {temp_min},{temp_max},{z_min},{z_max} -climatic_mass_balance {b_low},{b_high},250,{ela},3250 -climatic_mass_balance_limits -10,0 -stress_balance ssa+sia -pseudo_plastic -pseudo_plastic_q {q} -pseudo_plastic_uthreshold 100.0 -yield_stress mohr_coulomb -plastic_phi {phi} -ssafd_ksp_type gmres -ssafd_ksp_norm_type unpreconditioned -ssafd_ksp_pc_side right -ssafd_pc_type asm -ssafd_sub_pc_type lu -periodicity y   -stress_balance.sia.bed_smoother.range 100 -grid.registration corner -ocean constant -sea_level.constant.value 500 -calving float_kill -extra_times 100 -extra_file {odir}/spatial/spatial_{outfile} -extra_vars thk,topg,usurf,velbase_mag,velsurf_mag -ts_times yearly -ts_file {odir}/scalar/ts_{outfile} -y {runlength} -o {odir}/state/{outfile}"
     with open(script, "w", encoding="utf-8") as f:
         f.write(cmd)
         f.write("\n")
