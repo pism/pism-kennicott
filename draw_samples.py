@@ -19,14 +19,14 @@ dists: Dict[str, Any] = {
         "uq": {
             "b_low": uniform(loc=-6, scale=4),
             "b_high": uniform(loc=1, scale=4),
-            "ela": uniform(loc=600, scale=1000),
-            "temp_ela": uniform(loc=-20, scale=16),
-            "lapse_rate": uniform(loc=-7, scale=2),
+            "ela": uniform(loc=700, scale=9000),
         },
         "default_values": {
             "phi": 35.0,
             "pseudo_plastic_q": 0.5,
             "sia_e": 1.0,
+            "temp_ela": -10,
+            "lapse_rate": -6,
         },
     },
     "climate-flow": {
