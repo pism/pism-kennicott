@@ -22,12 +22,11 @@ import xarray as xr
 parser = ArgumentParser()
 parser.description = "Generate UQ using Latin Hypercube or Sobol Sequences."
 parser.add_argument(
-    "-s",
-    "--n_samples",
-    dest="n_samples",
-    type=int,
-    help="""number of samples to draw. default=10.""",
-    default=10,
+    "-o",
+    "--o_dir",
+    dest="odir",
+    help="""Output directory""",
+    default="test",
 )
 parser.add_argument(
     "-e",
@@ -44,7 +43,7 @@ uq_df.fillna(False, inplace=True)
 
 scripts = []
 runlength = 2000
-odir = "2023_07_uq_climate"
+odir = options.odir
 
 for d in [odir, f"{odir}/state",f"{odir}/spatial",f"{odir}/scalar", f"{odir}/run_scripts"]:
     if os.path.isdir(d) == False:

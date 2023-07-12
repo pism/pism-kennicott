@@ -19,7 +19,7 @@ dists: Dict[str, Any] = {
         "uq": {
             "b_low": uniform(loc=-6, scale=4),
             "b_high": uniform(loc=1, scale=4),
-            "ela": uniform(loc=700, scale=9000),
+            "ela": uniform(loc=700, scale=900),
         },
         "default_values": {
             "phi": 35.0,
